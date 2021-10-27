@@ -57,13 +57,14 @@ public class GetBookingTest extends BaseTest {
     @Test
     @Category({AcceptanceTests.class, AllTests.class})
     @DisplayName("Garantir o schema do retorno de uma reserva específica")
+    //Selecionei o ID, para retornar uma reserva especifica
     public void validaSchemaReservaEspecifica(){
         int primeiroId = getBookingRequest.bookingReturnIds()
                 .then()
                 .statusCode(200)
                 .extract()
                 .path("[0].bookingid");
-
+    //
         getBookingRequest.bookingReturn(primeiroId)
                 .then()
                 .statusCode(200)

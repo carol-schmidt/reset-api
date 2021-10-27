@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "description": "The root schema comprises the entire JSON document.",
+  "required": [
+    "firstname",
+    "lastname",
+    "totalprice",
+    "depositpaid",
+    "bookingdates",
+    "additionalneeds"
+  ],
+  "properties": {
+    "firstname": {
+      "$id": "#/properties/firstname",
+      "type": "string",
+      "description": "An explanation about the purpose of this instance."
+    },
+    "lastname": {
+      "$id": "#/properties/lastname",
+      "type": "string",
+      "description": "An explanation about the purpose of this instance."
+    },
+    "totalprice": {
+      "$id": "#/properties/totalprice",
+      "type": "integer",
+      "description": "An explanation about the purpose of this instance."
+    },
+    "depositpaid": {
+      "$id": "#/properties/depositpaid",
+      "type": "boolean",
+      "description": "An explanation about the purpose of this instance."
+    },
+    "bookingdates": {
+      "$id": "#/properties/bookingdates",
+      "type": "object",
+      "description": "An explanation about the purpose of this instance.",
+      "required": [
+        "checkin",
+        "checkout"
+      ],
+      "properties": {
+        "checkin": {
+          "$id": "#/properties/bookingdates/properties/checkin",
+          "type": "string",
+          "description": "An explanation about the purpose of this instance."
+        },
+        "checkout": {
+          "$id": "#/properties/bookingdates/properties/checkout",
+          "type": "string",
+          "description": "An explanation about the purpose of this instance."
+        }
+      }
+    },
+    "additionalneeds": {
+      "$id": "#/properties/additionalneeds",
+      "type": "string",
+      "description": "An explanation about the purpose of this instance."
+    }
+  }
+}

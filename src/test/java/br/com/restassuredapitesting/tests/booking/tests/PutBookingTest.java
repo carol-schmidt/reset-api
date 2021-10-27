@@ -55,12 +55,14 @@ public class PutBookingTest extends BaseTest {
     @Category({EndToEndTests.class,AllTests.class})
     @DisplayName("Alterar uma reserva quando o token for inválido")
     public void validarAlteracaoDeUmaReservaUtilizandoTokenInvalido() {
+        // busco primeiro ID de reserva da listagem para alterar
         int primeiroId = getBookingRequest.bookingReturnIds()
                 .then()
                 .statusCode(200)
                 .extract()
                 .path("[0].bookingid");
 
+        // tento alterar a reserva passando um token invalido  e espero receber erro 403
         putBookingRequest.updateBookingToken(primeiroId, "token=xxxxxx")
                 .then()
                 .statusCode(403);
@@ -69,12 +71,14 @@ public class PutBookingTest extends BaseTest {
     @Category({EndToEndTests.class, AllTests.class})
     @DisplayName("Alterar uma reserva quando o token não for enviado")
     public void validarAlteracaoDeUmaReservaUtilizandoTokenNaoEnviado() {
+        // busco primeiro ID de reserva da listagem para alterar
         int primeiroId = getBookingRequest.bookingReturnIds()
                 .then()
                 .statusCode(200)
                 .extract()
                 .path("[0].bookingid");
 
+        // tento alterar a reserva sem passar o token e espero receber erro 403
         putBookingRequest.updateBookingTokenNaoEnviado(primeiroId)
                 .then()
                 .statusCode(403);
