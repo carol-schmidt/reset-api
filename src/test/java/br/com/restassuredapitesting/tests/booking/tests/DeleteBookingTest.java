@@ -20,12 +20,10 @@ public class DeleteBookingTest extends BaseTest {
     @Category({AcceptanceTests.class, AllTests.class})
     @DisplayName("Deletar uma reserva somente utilizando token")
     public void validarExclusaoDeUmaReserva(){
-        int primeiroId = getBookingRequest.bookingReturnIds()
-                .then()
-                .statusCode(200)
-                .extract()
-                .path("[0].bookingid");
+        // busco primeiro ID de reserva da listagem para excluir
+        int primeiroId = getBookingRequest.getPrimeiroId();
 
+        // tento excluir a reserva e espero receber erro 201
         deleteBookingRequest.deleteBookingToken(primeiroId,postAuthRequest.getToken())
                 .then()
                 .statusCode(201);
@@ -35,19 +33,22 @@ public class DeleteBookingTest extends BaseTest {
     @Category({EndToEndTests.class, AllTests.class})
     @DisplayName("Deletar uma reserva que não existe")
     public void validarExclusaoDeUmaReservaQueNaoExiste(){
+        // Tento excluir uma reserva que não existe e espero receber erro 405
         deleteBookingRequest.deleteBookingToken(0, postAuthRequest.getToken())
               .then()
              .statusCode(405);
     }
+
     @Test
     @Category({EndToEndTests.class, AllTests.class})
     @DisplayName("Deletar uma reserva sem autorização")
     public void validarExclusaoDeUmaReservaSemAutorizacao(){
-        deleteBookingRequest.deleteBookingSemToken(0)
+        // busco primeiro ID de reserva da listagem para excluir
+        int primeiroId = getBookingRequest.getPrimeiroId();
+
+        //Tento excluir uma reserva sem o token que seria a autorização e espero receber o erro 403
+        deleteBookingRequest.deleteBookingSemToken(primeiroId)
                 .then()
                 .statusCode(403);
     }
-
 }
-
-

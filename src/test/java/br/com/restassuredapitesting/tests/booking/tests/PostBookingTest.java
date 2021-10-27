@@ -30,6 +30,8 @@ public class PostBookingTest extends BaseTest {
     @Category({EndToEndTests.class,AllTests.class})
     @DisplayName("Validar uma reserva com payload inválido")
     public void validandoReservaComPayloadInvalido() {
+        // Tento validar a reserva utilizando o payload de data de checkout inválida e espero recebre erro 500
+        // Este payload inválido está definido em Bookings Payloads
         postBookingRequest.createBookingInvalid(postAuthRequest.getToken())
                 .then()
                 .statusCode(500);
@@ -39,12 +41,14 @@ public class PostBookingTest extends BaseTest {
     @Category({EndToEndTests.class,AllTests.class})
     @DisplayName("Validar uma nova reserva em sequencia")
     public void CriandoUmaNovaReservaEmSequencia() {
+        // crio uma reserva e pega o id criado
         int primeiroId = postBookingRequest.createBooking(postAuthRequest.getToken())
                 .then()
                 .statusCode(200)
                 .extract()
                 .path("bookingid");
 
+        // cria uma segunda reserva e comparo seu id com o primeiro id + 1
         postBookingRequest.createBooking(postAuthRequest.getToken())
                 .then()
                 .statusCode(200)
@@ -55,7 +59,9 @@ public class PostBookingTest extends BaseTest {
     @Category({EndToEndTests.class, AllTests.class})
     @DisplayName("Validar uma reserva enviando mais parâmetros no payload da reserva")
     public void validandoReservaComMaisParametrosNoPayloadDaReserva(){
-        postBookingRequest.createBookingValidParamiterPayload(postAuthRequest.getToken())
+        // Tento validar a criação de uma reserva enviando mais parametros dos que os definidos no payload
+        // e espero receber erro 418
+        postBookingRequest.createBookingValidParameterPayload(postAuthRequest.getToken())
                 .then()
                 .statusCode(418);
     }
@@ -64,6 +70,8 @@ public class PostBookingTest extends BaseTest {
     @Category({EndToEndTests.class, AllTests.class})
     @DisplayName("Validar retorno 418 quando o header Accept for invalido")
     public void validandoReservaComOAcceptInvalido(){
+        // Tento validar reserva enviando o Accept (que está no PostBookingRequest) inválido e espero receber
+        // erro 418
         postBookingRequest.createBookingInvalidAccept(postAuthRequest.getToken())
                 .then()
                 .statusCode(418);

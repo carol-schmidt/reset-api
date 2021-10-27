@@ -42,7 +42,7 @@ public class PostBookingRequest {
     }
 
     @Step("Validar retorno 418 quando o header Accept for invalido")
-    public Response createBookingValidParamiterPayload(String token){
+    public Response createBookingValidParameterPayload(String token){
         return given()
                 .header("Content-Type","application/json")
                 .header("Accept","xxxxxx")

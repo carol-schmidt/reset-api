@@ -20,7 +20,6 @@ public class BookingPayloads {
         payload.put("bedroom","Standard");
 
         return payload;
-
     }
 
     public static JSONObject payloadInvalidBooking(){
@@ -35,8 +34,6 @@ public class BookingPayloads {
         payload.put("price",111);
         payload.put("bookingdates",bookingDates);
 
-
         return payload;
-
     }
 }

@@ -69,4 +69,12 @@ public class GetBookingRequest {
                 .get("booking?checkin="+checkin+"&checkout="+checkout);
     }
 
+    @Step("Busca o token")
+    public int getPrimeiroId(){
+        return this.bookingReturnIds()
+                .then()
+                .statusCode(200)
+                .extract()
+                .path("[0].bookingid");
+    }
 }
