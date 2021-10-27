@@ -19,4 +19,24 @@ public class PutBookingRequest {
                 .body(bookingPayloads.payloadValidBooking().toString())
                 .put("booking/"+id);
     }
+
+    @Step("Atualiza uma reserva especifica com o parametro Basic Auth")
+    public Response updateBookingBasicAuth(int id, String basicAuthorisation){
+        return given()
+                .header("Content-Type","application/json")
+                .header("Accept","application/json")
+                .header("Authorization", basicAuthorisation)
+                .when()
+                .body(bookingPayloads.payloadValidBooking().toString())
+                .put("booking/"+id);
+    }
+    @Step("Atualiza uma reserva especifica com o parametro token não enviado")
+    public Response updateBookingTokenNaoEnviado(int id){
+        return given()
+                .header("Content-Type","application/json")
+                .header("Accept","application/json")
+                .when()
+                .body(bookingPayloads.payloadValidBooking().toString())
+                .put("booking/"+id);
+    }
 }

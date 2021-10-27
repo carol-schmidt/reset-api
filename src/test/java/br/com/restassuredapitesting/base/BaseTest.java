@@ -8,4 +8,8 @@ public class BaseTest {
     public static void setup(){
         RestAssured.baseURI ="https://treinamento-api.herokuapp.com/";
     }
+
+    public static String getBasicAutorizationToken(){
+        return "Basic YWRtaW46cGFzc3dvcmQxMjM=";
+    }
 }
